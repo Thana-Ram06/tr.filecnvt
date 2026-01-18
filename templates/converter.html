@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - File Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📄 FileConverter</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="converter-page">
+            <a href="/" class="back-link">← Back to Home</a>
+            
+            <h1 class="page-title">{{ title }}</h1>
+            <p class="page-subtitle">{{ description }}</p>
+
+            <div id="uploadArea" class="upload-area">
+                <div class="upload-icon">📤</div>
+                <div class="upload-text">Click to upload or drag and drop</div>
+                <div class="upload-hint">Supported format: {{ supported_formats }}</div>
+            </div>
+
+            <input type="file" id="fileInput" accept="{{ accept_types }}">
+
+            <div id="fileInfo" class="file-info">
+                <div class="file-name" id="fileName"></div>
+                <div class="file-size" id="fileSize"></div>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <div id="progressContainer" class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Preparing...</div>
+            </div>
+
+            <button id="convertBtn" class="btn btn-primary" disabled>Convert File</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FileConverter. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

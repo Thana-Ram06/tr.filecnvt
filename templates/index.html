@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One File Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📄 FileConverter</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 style="text-align: center; color: white; font-size: 42px; margin-bottom: 20px;">
+            All-in-One File Converter
+        </h1>
+        <p style="text-align: center; color: white; font-size: 18px; margin-bottom: 40px;">
+            Convert files between multiple formats with high quality and speed
+        </p>
+
+        <div class="converter-grid">
+            <!-- To PDF Conversions -->
+            <a href="/word-to-pdf.html" class="converter-card">
+                <span class="converter-icon">📝</span>
+                <h2 class="converter-title">WORD → PDF</h2>
+                <p class="converter-description">Convert Word documents (.doc, .docx) to PDF format</p>
+            </a>
+
+            <a href="/excel-to-pdf.html" class="converter-card">
+                <span class="converter-icon">📊</span>
+                <h2 class="converter-title">EXCEL → PDF</h2>
+                <p class="converter-description">Convert Excel spreadsheets (.xls, .xlsx) to PDF format</p>
+            </a>
+
+            <a href="/powerpoint-to-pdf.html" class="converter-card">
+                <span class="converter-icon">📑</span>
+                <h2 class="converter-title">POWERPOINT → PDF</h2>
+                <p class="converter-description">Convert PowerPoint presentations (.ppt, .pptx) to PDF format</p>
+            </a>
+
+            <a href="/jpg-to-pdf.html" class="converter-card">
+                <span class="converter-icon">🖼️</span>
+                <h2 class="converter-title">JPG → PDF</h2>
+                <p class="converter-description">Convert JPG/PNG images to PDF documents</p>
+            </a>
+
+            <a href="/html-to-pdf.html" class="converter-card">
+                <span class="converter-icon">🌐</span>
+                <h2 class="converter-title">HTML → PDF</h2>
+                <p class="converter-description">Convert HTML files to PDF documents</p>
+            </a>
+
+            <!-- From PDF Conversions -->
+            <a href="/pdf-to-word.html" class="converter-card">
+                <span class="converter-icon">📄→📝</span>
+                <h2 class="converter-title">PDF → WORD</h2>
+                <p class="converter-description">Convert PDF documents to Word format (.docx)</p>
+            </a>
+
+            <a href="/pdf-to-excel.html" class="converter-card">
+                <span class="converter-icon">📄→📊</span>
+                <h2 class="converter-title">PDF → EXCEL</h2>
+                <p class="converter-description">Convert PDF documents to Excel format (.xlsx)</p>
+            </a>
+
+            <a href="/pdf-to-powerpoint.html" class="converter-card">
+                <span class="converter-icon">📄→📑</span>
+                <h2 class="converter-title">PDF → POWERPOINT</h2>
+                <p class="converter-description">Convert PDF documents to PowerPoint format (.pptx)</p>
+            </a>
+
+            <a href="/pdf-to-jpg.html" class="converter-card">
+                <span class="converter-icon">📄→🖼️</span>
+                <h2 class="converter-title">PDF → JPG</h2>
+                <p class="converter-description">Convert PDF pages to JPG images</p>
+            </a>
+
+            <a href="/pdf-to-pdfa.html" class="converter-card">
+                <span class="converter-icon">📄→📋</span>
+                <h2 class="converter-title">PDF → PDF/A</h2>
+                <p class="converter-description">Convert PDF to PDF/A archive format</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FileConverter. All rights reserved.</p>
+        <p style="font-size: 14px; margin-top: 10px;">Professional file conversion made simple</p>
+    </footer>
+</body>
+</html>
+
