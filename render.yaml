@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: file-converter
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: 1
+    healthCheckPath: /api/health
