@@ -13,7 +13,6 @@ from datetime import datetime
 from pdf2image import convert_from_path
 from PIL import Image
 import pdf2docx
-from pdf2pptx import convert_pdf2pptx
 import logging
 import zipfile
 
@@ -435,7 +434,7 @@ def pdf_to_excel():
 # ==================== PDF → POWERPOINT ====================
 @app.route('/api/convert/pdf-to-powerpoint', methods=['POST'])
 def pdf_to_powerpoint():
-    """Convert PDF to PowerPoint using pdf2pptx"""
+    """Convert PDF to PowerPoint using LibreOffice"""
     try:
         if 'file' not in request.files:
             return jsonify({'error': 'No file provided'}), 400
@@ -452,16 +451,42 @@ def pdf_to_powerpoint():
         input_path = os.path.join(UPLOAD_FOLDER, f"{timestamp}_{filename}")
         file.save(input_path)
         
-        base_name = os.path.splitext(filename)[0]
-        final_output = os.path.join(OUTPUT_FOLDER, f"{timestamp}_{base_name}.pptx")
+        output_dir = os.path.join(OUTPUT_FOLDER, f"pdf_pptx_{timestamp}")
+        os.makedirs(output_dir, exist_ok=True)
         
-        # Convert PDF to PPTX
-        convert_pdf2pptx(input_path, final_output)
+        # LibreOffice can convert PDF to PowerPoint
+        cmd = [
+            'soffice',
+            '--headless',
+            '--convert-to', 'pptx',
+            '--outdir', output_dir,
+            input_path
+        ]
+        
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        
+        if result.returncode != 0:
+            cleanup_files(input_path)
+            return jsonify({'error': f'Conversion failed: {result.stderr}'}), 500
+        
+        base_name = os.path.splitext(filename)[0]
+        output_path = os.path.join(output_dir, f"{base_name}.pptx")
+        
+        if not os.path.exists(output_path):
+            cleanup_files(input_path)
+            return jsonify({'error': 'Conversion failed: Output file not found'}), 500
+        
+        final_output = os.path.join(OUTPUT_FOLDER, f"{timestamp}_{base_name}.pptx")
+        shutil.move(output_path, final_output)
+        shutil.rmtree(output_dir, ignore_errors=True)
         
         cleanup_files(input_path)
         
         return send_file(final_output, as_attachment=True, download_name=f"{base_name}.pptx")
     
+    except subprocess.TimeoutExpired:
+        cleanup_files(input_path)
+        return jsonify({'error': 'Conversion timeout'}), 500
     except Exception as e:
         cleanup_files(input_path)
         logger.error(f"PDF to PowerPoint error: {str(e)}")
